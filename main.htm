@@ -1,0 +1,90 @@
+<html>
+
+    <head>
+        <title>Explorer Lite</title>
+        <style>
+            @import url(folder-view.css);
+
+            html {
+                min-width: max-content;
+                min-height: max-content;
+            }
+
+            body {
+                flow: horizontal;
+                margin: 0;
+                size: *;
+            }
+
+            folder {
+                size: *;
+            }
+
+            div.about {
+                width: 10em;
+                height: *;
+                background-color: rgb(240, 240, 240);
+            }
+
+            .col {
+                flow: vertical;
+                size: *;
+                padding: 0.5em;
+                border-spacing: 0.125em;
+            }
+
+            .row {
+                flow: horizontal;
+                width: *;
+                height: max-content;
+            }
+
+            .row>span {
+                size: *;
+                flow: horizontal;
+                text-align: center;
+            }
+
+            .row>span>button {
+                width: *;
+                height: 2em;
+            }
+        </style>
+        <script>
+
+            adjustWindow();
+
+            function adjustWindow() {
+                const w = 600;
+                const h = 400;
+                const [sw, sh] = Window.this.screenBox('frame', 'dimension');
+                Window.this.move((sw - w) / 2, (sh - h) / 2, w, h, true);
+            }
+
+
+            document.on("file-activate", function (evt) {
+                console.log("file-activate", evt.data);
+            });
+
+            document.querySelector('#about').on('click', () => {
+                Window.this.modal(<info>This application uses <a href="https://sciter.com">Sciter</a> Engine, © Terra Informatica Software, Inc.</info>);
+            });
+
+        </script>
+    </head>
+
+    <body>
+        <div .about>
+            <div .col>
+                <div .row>
+                    <span>
+                        <button #about>About</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <folder filter="*.rtf;*.pdf;*.lnk;*.url" />
+
+    </body>
+
+</html>
