@@ -38,7 +38,7 @@ export class FolderView extends Element {
       }
       this.post(new Event("folder-change", { data: path, bubbles: true }));
     } else {
-      sys.spawn(['cmd.exe', '/C', 'start', path]);
+      env.launch(path);
       this.post(new Event("file-activate", { data: path, bubbles: true }));
     }
     return true;
